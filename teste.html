@@ -4,10 +4,10 @@
  <body  onload="draw();">
    <canvas id="canvas" width="1000" height="700"></canvas>
  </body>
- <script type='text/javascript' src='valores.json'></script> 
+ <script type='text/javascript' src='popbrasil.json'></script> 
  
 <script type='text/javascript'>
-	var ctx;
+	
 	var mx;
 	var my;
 	var iniciou = false;
@@ -15,26 +15,56 @@
 	var mediaMovel = [];
 	var tamMediaMovel = 20;
 	
+	var ctx;
+	var	anoInicial = 2001;
+	var	anoFinal = 2017;
+	var pupulacaoAno = [];
+	
 	function init(){
 	
-	  var canvas = document.getElementById('canvas');
+	var canvas = document.getElementById('canvas');
+	
+	if (canvas.getContext) {
+		ctx = canvas.getContext('2d');
+	}
+	
+	for (var ano = anoInicial; ano <= anoFinal; ano++) {
+		if (ano != 2007 && ano != 2010){
+			pupulacaoAno[ano] = 0;
+		}
+	}
+	
+	for(var i = 0; i < popbrasil.length;i++){
+		for (var ano = anoInicial; ano <= anoFinal; ano++) {
+			if (ano != 2007 && ano != 2010 && !isNaN(popbrasil[i][ano])){
+				pupulacaoAno[ano] += new Number(popbrasil[i][ano]);
+			}
+			if (ano != 2007 && ano != 2010 && isNaN(popbrasil[i][ano])){
+				//console.log(ano + " - " + i + " - " + popbrasil[i][ano]);
+			}
+		}
+	} 
 	  
-	  if (canvas.getContext) {
-			ctx = canvas.getContext('2d');
-	  }
-
-	  for(var i = 0; i < 300;i++){
+	for (var ano = anoInicial; ano <= anoFinal; ano++) {
+		if (ano != 2007 && ano != 2010){
+			//console.log(ano + "= :" + pupulacaoAno[ano]);
+		}
+	}
+	
+	for (var ano = anoInicial; ano <= anoFinal; ano++) {
+		if (ano != 2007 && ano != 2010){
+			pupulacaoAno[ano] = Math.round(pupulacaoAno[ano]/1000000);
+		}
+	}
+	
+	for(var i = 150; i < 220;i++){
 		faixas[i] = 0;
 		mediaMovel[i] = 0;
-	  }
-
+	}
+	
+	  /* 
 	  for(var i = 0; i < valores.length;i++){
-			var v = valores[i]["val"];
-
-		//for(var x = 2001; x <= 2017;x++){
-
-		//}
-
+		var v = valores[i]["val"];
 		faixas[v] = faixas[v]+1;
 		//ctx.fillRect(i, 0, 1, v);
 	  }
@@ -46,7 +76,7 @@
 		}
 		var media = soma/(tamMediaMovel*2+1);
 		mediaMovel[i] = media;
-	  }
+	  } */
 	  
 	  iniciou = true;
 	}
@@ -64,20 +94,25 @@
 		
 			//ctx.translate(mx,my);
 			ctx.scale(2.5,2.5);
-
-			ctx.fillStyle = 'green';
+			
+			//172.385.826
+			//207.660.929
+			
+			ctx.fillStyle = 'blue';
 			for(var i = 0; i < faixas.length;i++){
 				var v = faixas[i]
 				ctx.fillRect(i, 200, 1, -v);
 			}
 			
 			ctx.beginPath();
-				ctx.strokeStyle = 'red';
-				ctx.moveTo(tamMediaMovel,200-mediaMovel[5]);
-				for(var i = tamMediaMovel; i < mediaMovel.length;i++){
-					ctx.lineTo(i,200-mediaMovel[i]);
-					ctx.moveTo(i,200-mediaMovel[i]);
-				}
+			ctx.strokeStyle = 'red';
+			ctx.moveTo(tamMediaMovel,200-mediaMovel[5]);
+			
+			for(var i = tamMediaMovel; i < mediaMovel.length;i++){
+				ctx.lineTo(i,200-mediaMovel[i]);
+				ctx.moveTo(i,200-mediaMovel[i]);
+			}
+			
 			ctx.closePath();
 			ctx.stroke();
 		
