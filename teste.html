@@ -99,7 +99,7 @@
 			
 			ctx.fillStyle = 'green';
 			for(var i = 0; i < pupulacaoAno.length;i++){
-				ctx.fillRect(i*12+12, 220, 10, -pupulacaoAno[i+2001]);
+				ctx.fillRect(i*12+12, 220, 10, -pupulacaoAno[i+anoInicial]);
 				ctx.fillStyle = 'green';
 				if (i% 2 === 0){
 					ctx.fillStyle = 'blue';
@@ -114,9 +114,14 @@
 			ctx.strokeStyle = 'red';
 			ctx.moveTo(tamMediaMovel,220-mediaMovel[5]);
 			
+			for(var i = 0; i < pupulacaoAno.length;i++){
+				ctx.lineTo(i*12+17,220-pupulacaoAno[i+anoInicial]);
+				ctx.moveTo(i*12+17,220-pupulacaoAno[i+anoInicial]);
+			}
+			
 			for(var i = tamMediaMovel; i < mediaMovel.length;i++){
-				ctx.lineTo(i,220-mediaMovel[i]);
-				ctx.moveTo(i,220-mediaMovel[i]);
+				//ctx.lineTo(i,220-mediaMovel[i]);
+				//ctx.moveTo(i,220-mediaMovel[i]);
 			}
 			
 			ctx.closePath();
@@ -126,7 +131,7 @@
 			ctx.fillRect(0, 0, 1, 220);
 			ctx.fillRect(0, 220, 310, 1);
 			
-			for(var i = 1; i < 20;i++){
+			for(var i = 1; i < 22;i++){
 				ctx.fillRect(0, 220-(i*10), 5, 1);
 			}
 		ctx.restore();
