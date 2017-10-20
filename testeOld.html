@@ -1,0 +1,129 @@
+<html>
+
+
+ <body  onload="draw();">
+   <canvas id="canvas" width="1000" height="700"></canvas>
+ </body>
+ <script type='text/javascript' src='valores.json'></script> 
+ 
+<script type='text/javascript'>
+	var ctx;
+	var mx;
+	var my;
+	var iniciou = false;
+	var faixas = [];
+	var mediaMovel = [];
+	var tamMediaMovel = 20;
+	
+	function init(){
+	
+	  var canvas = document.getElementById('canvas');
+	  if (canvas.getContext) {
+			ctx = canvas.getContext('2d');
+	  }
+	  for(var i = 0; i < 300;i++){
+		faixas[i] = 0;
+		mediaMovel[i] = 0;
+	  }
+	  for(var i = 0; i < valores.length;i++){
+			var v = valores[i]["val"];
+			faixas[v] = faixas[v]+1;
+			//ctx.fillRect(i, 0, 1, v);
+	  }
+	  
+	  for(var i = tamMediaMovel; i < (300-tamMediaMovel-1);i++){
+		var soma = 0;
+		for(var j = 0; j < (tamMediaMovel*2+1);j++){
+			soma+=faixas[i+j-tamMediaMovel];
+		}
+		var media = soma/(tamMediaMovel*2+1);
+		mediaMovel[i] = media;
+	  }
+	  
+	  iniciou = true;
+	}
+	
+	function draw() {
+		if(iniciou==false){
+			init();
+		}
+	
+		ctx.fillStyle = 'white';
+		ctx.strokeStyle = 'white';
+		ctx.fillRect(0, 0, 1000, 700);
+		
+		ctx.save();
+		
+			//ctx.translate(mx,my);
+			ctx.scale(2.5,2.5);
+
+			ctx.fillStyle = 'green';
+			for(var i = 0; i < faixas.length;i++){
+				var v = faixas[i]
+				ctx.fillRect(i, 200, 1, -50);
+			}
+			
+			ctx.beginPath();
+				ctx.strokeStyle = 'red';
+				ctx.moveTo(tamMediaMovel,200-mediaMovel[5]);
+				for(var i = tamMediaMovel; i < mediaMovel.length;i++){
+					ctx.lineTo(i,200-mediaMovel[i]);
+					ctx.moveTo(i,200-mediaMovel[i]);
+				}
+			ctx.closePath();
+			ctx.stroke();
+		
+			ctx.fillStyle = 'blue';
+			ctx.fillRect(0, 0, 1, 200);
+			ctx.fillRect(0, 200, 310, 1);
+			
+			for(var i = 1; i < 20;i++){
+				ctx.fillRect(0, 200-(i*10), 5, 1);
+			}
+		ctx.restore();
+		
+		//ctx.fillStyle = 'blue';
+		//ctx.fillRect(10, 0, 1, 100);
+		
+		
+		/*ctx.beginPath();
+			ctx.moveTo(0,0);
+			ctx.lineTo(mx,my);
+		ctx.closePath();
+		ctx.stroke();*/
+		
+		//ctx.fillRect(0, 0, 500, 500);
+		
+		
+		
+		
+	}
+	
+	(function() {
+		draw();
+		document.onmousemove = handleMouseMove;
+		function handleMouseMove(event) {
+		
+			mx = event.clientX;
+			my = event.clientY;
+			
+			/*ctx.fillStyle = 'white';
+			ctx.clearRect(0,0,500,500);
+			ctx.fill();
+
+			ctx.fillStyle = 'green';
+			ctx.strokeStyle = 'blue';
+			
+			ctx.strokeRect(20, 20, 100, 100);
+			ctx.fillRect(10, 10, 100, 100);*/
+			
+			//ctx.moveTo(0,0);
+			//ctx.lineTo(x,y);
+			//ctx.stroke();
+			
+			//draw();
+			
+		}
+	})();	
+</script> 
+</html>
