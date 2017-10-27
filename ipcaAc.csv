@@ -1,0 +1,26 @@
+IPCA - Variação mensal, acumulada no ano, acumulada em 12 meses e peso mensal, segundo o índice geral e os grupos de produtos e serviços;;;;
+São Paulo - setembro 2017;;;;
+Índice geral e grupos de produtos e serviços;Variação mensal (%);Variação acumulada no ano (%);Variação acumulada em 12 meses (%);Peso mensal (%)
+Índice geral;0,19;1,9;2,75;100
+
+Alimentação e bebidas;-0,2;-1,19;-1,77;23,5409
+Habitação;-0,71;3,28;3,63;15,276
+Artigos de residência;0,67;0,27;-1,33;3,5643
+Vestuário;0,44;2,55;3,01;5,3597
+Transportes;0,81;-0,22;2,7;19,0808
+Saúde e cuidados pessoais;0,24;5,98;7,68;12,7495
+Despesas pessoais;0,88;4,43;6,02;11,5784
+Educação;-0,03;6,55;6,66;5,2515
+Comunicação;0,31;0,72;1,57;3,5989
+
+
+['Serviço', 'Peso mensal (%)'],
+['Alimentação e bebidas',     23.5409],
+['Habitação',      15.276],
+['Artigos de residência',  3.5643],
+['Vestuário', 5.3597],
+['Transportes',    19.0808],
+['Saúde e cuidados pessoais', 12.7495],
+['Despesas pessoais', 11.5784],
+['Educação', 5.2515],
+['Comunicação', 3.5989]

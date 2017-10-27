@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+        	['Serviço', 'Peso mensal (%)'],
+        	['Alimentação e bebidas',     23.5409],
+        	['Habitação',      15.276],
+        	['Artigos de residência',  3.5643],
+        	['Vestuário', 5.3597],
+        	['Transportes',    19.0808],
+        	['Saúde e cuidados pessoais', 12.7495],
+        	['Despesas pessoais', 11.5784],
+        	['Educação', 5.2515],
+        	['Comunicação', 3.5989]
+        ]);
+
+        var options = {
+          title: 'IPCA - Variação mensal, acumulada no ano'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+  </head>
+  <body>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
