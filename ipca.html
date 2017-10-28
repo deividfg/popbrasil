@@ -84,14 +84,14 @@
         var data = google.visualization.arrayToDataTable([
         	['Serviço', 'Peso mensal (%)'],
         	['Alimentação e bebidas',     23.5409],
-        	['Habitação',      15.276],
-        	['Artigos de residência',  3.5643],
-        	['Vestuário', 5.3597],
         	['Transportes',    19.0808],
+        	['Habitação',      15.276],
         	['Saúde e cuidados pessoais', 12.7495],
         	['Despesas pessoais', 11.5784],
+        	['Vestuário', 5.3597],
         	['Educação', 5.2515],
-        	['Comunicação', 3.5989]
+        	['Comunicação', 3.5989],
+        	['Artigos de residência',  3.5643]
         ]);
 
         var options = {
@@ -133,6 +133,46 @@
         chart.draw(data, google.charts.Bar.convertOptions(options));
       }
       
+      /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart6);
+
+      function drawChart6() {
+        var data = google.visualization.arrayToDataTable([
+			['Cereal', '2016', '2017'],
+            ['Algodão herbáceo',	15246,	13135 ],                 
+			['Amendoin',	530313,	502286],                        
+			['Arroz',	60860,	38465],                         
+			['Aveia',	12967,	21218],                         
+			['Cevada',	10783,	6000],                         
+			['Feijão', 	308813	,260300 ],                        
+			['Girassol',	4115	,1686],                         
+			['Mamona',	207,	4],                         
+			['Milho' ,	4592671,5335500],                       
+			['Soja',	2791872,	3173200],                         
+			['Sorgo',	79886,	65729],                         
+			['Trigo',	361007,	296200],                         
+			['Triticale',	8918,	13345],    
+        ]);
+       
+        var formatter = new google.visualization.NumberFormat(
+                {prefix: '', negativeColor: 'red', negativeParens: true, fractionDigits: 2});
+            formatter.format(data, 1); // Apply formatter to second column
+            formatter.format(data, 2); // Apply formatter to second column
+           
+        var options = {
+          chart: {
+            title: 'Produção de Cereais',
+            subtitle: 'Em toneladas - São Paulo',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material2'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+
       /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
       
       google.charts.load('current', {'packages':['bar']});
@@ -190,9 +230,9 @@
 	  
 		  var data2 = google.visualization.arrayToDataTable([
 			 ['Regiao','Populacao'],
+			 ['Restante do Estado', 24733399],
 			 ['São Paulo', 12106920],
-			 ['Regiao Metropolitana de SP', 8254547],
-			 ['Restante do Estado', 24733399]
+			 ['Regiao Metropolitana de SP', 8254547]
 			]);
 
 			var options2 = {
@@ -255,6 +295,10 @@
 	  	</td></tr>
 	  	<tr><td>
 	  		<div id="columnchart_material" style="width: 1600px; height: 800px;"></div>
+	  		</br></br></br>
+	  	</td></tr>
+	  	<tr><td>
+	  		<div id="columnchart_material2" style="width: 1600px; height: 800px;"></div>
 	  		</br></br></br>
 	  	</td></tr>
 	  	<tr><td>
