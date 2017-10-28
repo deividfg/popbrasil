@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>	
+	<script type="text/javascript">
+	  google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);	
+	  
+		   
+      function drawStuff() {
+	   
+		var data = new google.visualization.arrayToDataTable([
+			['Região','População', { role: 'style' }, { role: 'annotation' } ],
+			['Sao_Paulo',12106920, 'blue', 12106920],
+			['Zona Leste',2927121, 'blue', 2927121],
+			['Zona Sul',2875515, 'blue', 2875515],
+			['Zona Oeste',1863062, 'blue', 1863062],			
+			['Zona Norte',588849, 'blue', 588849]
+			]);
+			
+		var formatter = new google.visualization.NumberFormat(
+			{prefix: '', negativeColor: 'red', negativeParens: true, fractionDigits: 2});
+		formatter.format(data, 1); // Apply formatter to second column
+
+		var view = new google.visualization.DataView(data);
+			  view.setColumns([0, 1,
+							   { calc: "stringify",
+								 sourceColumn: 1,
+								 type: "string",
+								 role: "annotation" },
+							   2]);
+
+        var options = {
+          title: 'Região Metropolitana de SP',
+          width: 500,
+          legend: { position: 'none' },          
+          bars: 'horizontal', // Required for Material Bar Charts.
+          axes: {
+            x: {
+              0: { side: 'top', label: 'Região Metropolitana de SP por Região'} // Top x-axis.
+            }
+          },
+          bar: { groupWidth: "100%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+        chart.draw(view, options);
+		
+      };
+	  
+	  google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawStuff2);
+	
+	  
+	  function drawStuff2() {
+	  
+		  var data2 = google.visualization.arrayToDataTable([
+			 ['Regiao','Populacao'],
+			 ['São Paulo', 12106920],
+			 ['Regiao Metropolitana de SP', 8254547],
+			 ['Restante do Estado', 24733399]
+			]);
+
+			var options2 = {
+			  title: 'População do Estado de SP'
+			};
+
+			var chart2 = new google.visualization.PieChart(document.getElementById('piechart'));
+
+			chart2.draw(data2, options2);
+
+	  };
+	  
+  
+	    google.charts.load("current", {packages:["corechart"]});
+		google.charts.setOnLoadCallback(drawChart);
+
+	  
+		function drawChart() {
+			var data4 = google.visualization.arrayToDataTable([
+			  ['Regiao', 'Populacao',{ role: 'style' },{ role: 'annotation' } ],
+			  ['Total', 45015000,'silver','45015000'],
+			  ['Outras Regiões', 24733399,'silver' ,'24733399'],
+			  ['São Paulo Capital', 12106920,'silver' ,'12106920'],
+			  ['Reg. Metrop. de SP',8254547,'silver', '8254547']
+			  
+			]);	
+
+			var view = new google.visualization.DataView(data4);
+			  view.setColumns([0, 1,
+							   { calc: "stringify",
+								 sourceColumn: 1,
+								 type: "string",
+								 role: "annotation" },
+							   2]);
+
+			  var options4 = {
+				title: "População do Estado de SP",
+				width: 800,
+				height: 400,
+				bar: {groupWidth: "95%"},
+				legend: { position: "none" },
+			  };
+
+			
+
+			 var chart4 = new google.visualization.BarChart(document.getElementById("barchart_values"));
+			chart4.draw(view, options4);
+		  }
+	  
+    </script>
+  </head>
+  <body>
+    <div id="top_x_div" style="width: 900px; height: 500px;"></div>
+	<div id="piechart" style="width: 900px; height: 500px;"></div>	
+	<div id="barchart_values" style="width: 900px; height: 500px;"></div>
+
+  </body>
+</html>

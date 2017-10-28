@@ -2,23 +2,13 @@
 <html>
   <head>
   	<meta charset="utf-8">
-  	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="jquery.csv.min.js"></script>
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script> -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+    
       google.charts.load('current', {'packages':['linechart']});
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawChart1);
       
-      function drawChart() {
-
-    	  /* $.get("ipca.csv", function(csvString) {
-    	      // transform the CSV string into a 2-dimensional array
-    	      var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
-
-    	      // this new DataTable object holds all the data
-    	      var data = new google.visualization.arrayToDataTable(arrayData);
-    	   }); */
+      function drawChart1() {
 
    	        var data = google.visualization.arrayToDataTable([
    	        		['Índice geral e grupos de produtos e serviços','Índice geral','Alimentação e bebidas','Habitação','Artigos de residência','Vestuário','Transportes','Saúde e cuidados pessoais','Despesas pessoais','Educação','Comunicação'],
@@ -47,9 +37,193 @@
 
         chart.draw(data, options);
       }
+      
+      /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+      
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart2);
+
+      function drawChart2() {
+
+        var data = google.visualization.arrayToDataTable([
+        	['Serviço', 'Peso mensal (%)'],
+        	['Alimentação e bebidas',     23.5409],
+        	['Habitação',      15.276],
+        	['Artigos de residência',  3.5643],
+        	['Vestuário', 5.3597],
+        	['Transportes',    19.0808],
+        	['Saúde e cuidados pessoais', 12.7495],
+        	['Despesas pessoais', 11.5784],
+        	['Educação', 5.2515],
+        	['Comunicação', 3.5989]
+        ]);
+
+        var options = {
+          title: 'IPCA - Variação mensal, acumulada no ano (2017) - Peso mensal (%)'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+      
+      /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+      
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart3);
+
+      function drawChart3() {
+        var data = google.visualization.arrayToDataTable([
+          ['Produto', 'Safra 2016', 'Safra 2017'],
+          ['Cereais', 8771712, 9721945],
+          ['Frutas', 14194122, 14366733],
+          ['Legumes', 3148213, 3061034]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'LSPA - Produção, por período da safra e produto.',
+            subtitle: 'Em toneladas - São Paulo',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+      
+      /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+      
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);	
+	  
+		   
+      function drawStuff() {
+	   
+		var data = new google.visualization.arrayToDataTable([
+			['Região','População', { role: 'style' }, { role: 'annotation' } ],
+			['Sao_Paulo',12106920, 'blue', 12106920],
+			['Zona Leste',2927121, 'blue', 2927121],
+			['Zona Sul',2875515, 'blue', 2875515],
+			['Zona Oeste',1863062, 'blue', 1863062],			
+			['Zona Norte',588849, 'blue', 588849]
+			]);
+			
+		var formatter = new google.visualization.NumberFormat(
+			{prefix: '', negativeColor: 'red', negativeParens: true, fractionDigits: 2});
+		formatter.format(data, 1); // Apply formatter to second column
+
+		var view = new google.visualization.DataView(data);
+			  view.setColumns([0, 1,
+							   { calc: "stringify",
+								 sourceColumn: 1,
+								 type: "string",
+								 role: "annotation" },
+							   2]);
+
+        var options = {
+          title: 'Região Metropolitana de SP',
+          width: 500,
+          legend: { position: 'none' },          
+          bars: 'horizontal', // Required for Material Bar Charts.
+          axes: {
+            x: {
+              0: { side: 'top', label: 'Região Metropolitana de SP por Região'} // Top x-axis.
+            }
+          },
+          bar: { groupWidth: "100%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+        chart.draw(view, options);
+		
+      };
+	  
+      /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+      
+	  google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawStuff2);
+	
+	  
+	  function drawStuff2() {
+	  
+		  var data2 = google.visualization.arrayToDataTable([
+			 ['Regiao','Populacao'],
+			 ['São Paulo', 12106920],
+			 ['Regiao Metropolitana de SP', 8254547],
+			 ['Restante do Estado', 24733399]
+			]);
+
+			var options2 = {
+			  title: 'População do Estado de SP'
+			};
+
+			var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+			chart2.draw(data2, options2);
+
+	  };
+	  
+	  /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+	  
+	    google.charts.load("current", {packages:["corechart"]});
+		google.charts.setOnLoadCallback(drawChart4);
+	  
+		function drawChart4() {
+			var data4 = google.visualization.arrayToDataTable([
+			  ['Regiao', 'Populacao',{ role: 'style' },{ role: 'annotation' } ],
+			  ['Total', 45015000,'silver','45015000'],
+			  ['Outras Regiões', 24733399,'silver' ,'24733399'],
+			  ['São Paulo Capital', 12106920,'silver' ,'12106920'],
+			  ['Reg. Metrop. de SP',8254547,'silver', '8254547']
+			  
+			]);	
+
+			var view = new google.visualization.DataView(data4);
+			  view.setColumns([0, 1,
+							   { calc: "stringify",
+								 sourceColumn: 1,
+								 type: "string",
+								 role: "annotation" },
+							   2]);
+
+			  var options4 = {
+				title: "População do Estado de SP",
+				bar: {groupWidth: "95%"},
+				legend: { position: "none" },
+			  };
+
+			 var chart4 = new google.visualization.BarChart(document.getElementById("barchart_values"));
+			chart4.draw(view, options4);
+		  }
     </script>
   </head>
   <body>
-    <div id="curve_chart" style="width: 900px; height: 500px"></div>
-  </body>
+  	<table>
+	  	<tr><td>
+	  		<div id="curve_chart" style="width: 1800px; height: 1000px"></div>
+	  		</br></br></br>
+	  	</td></tr>
+	  	<tr><td>
+			<div id="piechart" style="width: 1800px; height: 1000px;"></div>
+	  		</br></br></br>
+	  	</td></tr>
+	  	<tr><td>
+	  		<div id="columnchart_material" style="width: 1600px; height: 800px;"></div>
+	  		</br></br></br>
+	  	</td></tr>
+	  	<tr><td>
+			<div id="top_x_div" style="width: 1800px; height: 800px;"></div>
+	  		</br></br></br>
+	  	</td></tr>
+	  	<tr><td>
+	  		<div id="piechart2" style="width: 1800px; height: 1000px;"></div>	
+	  		</br></br></br>
+	  	</td></tr>
+	  	<tr><td>
+			<div id="barchart_values" style="width: 1800px; height: 1000px;"></div>
+			</br></br></br>
+	  	</td></tr>
+  	</table>
+    </body>
 </html>
